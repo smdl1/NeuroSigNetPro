@@ -1,0 +1,35 @@
+name: Build NeuroSigNet Pro
+
+on:
+  push:
+    branches: [ main ]
+  release:
+    types: [ published ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Download Code
+      uses: actions/checkout@v4
+      
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        
+    - name: Install Packages
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyinstaller requests pillow
+        
+    - name: Build EXE Installer
+      run: |
+        pyinstaller --onefile --console --name "NeuroSigNetPro_Installer" installer_advanced.py
+        
+    - name: Upload Installer
+      uses: actions/upload-artifact@v4
+      with:
+        name: NeuroSigNetPro-Installer
+        path: dist/NeuroSigNetPro_Installer.exe
