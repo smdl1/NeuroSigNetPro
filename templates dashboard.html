@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NeuroSigNet Pro</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .upload-area { border: 2px dashed #ccc; padding: 40px; text-align: center; margin: 20px 0; }
+        .btn { background: #007bff; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>NeuroSigNet Pro Dashboard</h1>
+        
+        <div class="upload-area">
+            <h3>Upload Document for Analysis</h3>
+            <input type="file" id="fileInput" multiple>
+            <button class="btn" onclick="uploadFiles()">Analyze Documents</button>
+        </div>
+        
+        <div id="results"></div>
+    </div>
+
+    <script>
+        async function uploadFiles() {
+            const files = document.getElementById('fileInput').files;
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<p>Processing... Please wait</p>';
+            
+            for (let file of files) {
+                const formData = new FormData();
+                formData.append('file', file);
+                
+                try {
+                    const response = await fetch('/api/v1/analyze', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    const result = await response.json();
+                    resultsDiv.innerHTML += `<p>✅ Processed: ${file.name} - ${result.result.signatures_found} signatures found</p>`;
+                } catch (error) {
+                    resultsDiv.innerHTML += `<p>❌ Error processing: ${file.name}</p>`;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

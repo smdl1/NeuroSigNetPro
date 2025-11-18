@@ -1,0 +1,36 @@
+NeuroSigNetPro/
+├── .github/
+│   └── workflows/
+│       └── build.yml                 # Автосборка
+├── core/
+│   ├── __init__.py
+│   ├── config.py                     # Конфигурация
+│   ├── database.py                   # База данных
+│   └── security.py                   # Безопасность
+├── services/
+│   ├── __init__.py
+│   ├── document_processor.py         # Обработка документов
+│   ├── ai_enhancer.py               # Улучшение AI
+│   ├── export_manager.py            # Экспорт
+│   └── batch_processor.py           # Пакетная обработка
+├── utils/
+│   ├── __init__.py
+│   ├── installer.py                 # Установщик
+│   └── system_monitor.py            # Мониторинг системы
+├── assets/
+│   ├── icon.ico                     # Иконка программы
+│   └── splash.png                   # Заставка
+├── docs/
+│   └── index.html                   # Документация
+├── templates/
+│   └── dashboard.html               # Веб-интерфейс
+├── static/
+│   ├── css/
+│   │   └── main.css                 # Стили
+│   └── js/
+│       └── app.js                   # JavaScript
+├── main.py                          # Главный файл
+├── installer_advanced.py            # Установщик
+├── requirements.txt                 # Зависимости
+├── README.md                        # Описание
+└── build_config.json               # Конфиг сборки
